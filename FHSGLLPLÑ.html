@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        
+        body {
+            text-align: center;
+            background-color: white;
+            font-family: 'Pacifico', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            background: #ff4d79;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+        #hearts, #celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating {
+            position: absolute;
+            animation: floatUp 5s linear infinite;
+        }
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+        .envelope-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .envelope {
+            width: 350px;
+            cursor: pointer;
+            animation: shake 0.5s infinite alternate;
+            background: none;
+        }
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+            100% { transform: rotate(3deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope-container">
+        <img src="https://img.freepik.com/vector-premium/ilustracion-acuarela-carta-amor-corazon-sobre-fondo-transparente_552457-345.jpg" class="envelope" onclick="openLetter()" id="envelope">
+    </div>
+    <div id="hearts"></div>
+    <div id="celebration"></div>
+    <div class="card hidden" id="message">
+        <p>Te ha llegado una cartita de Calito 💌</p>
+        <button onclick="showMessage(1)">Abrir</button>
+    </div>
+    <div class="card hidden" id="message1">
+        <p>Hola mi amor, pasaba por aquí para mostrarte que me he tomado un tiempito para hacerte este pequeñito detalle y recordarte lo especial que eres para mí...</p>
+        <button onclick="showMessage(2)">Seguir leyendo...</button>
+    </div>
+    <div class="card hidden" id="message2">
+        <p>Por eso me gustaría decirte que aunque parezca un novio ausente en muchas ocasiones en las cuáles echas en falta mi lado más detallista, te tengo muy presente en mi corazón y nunca dejaré que esa sensación muera dentro de mí...</p>
+        <button onclick="showMessage(3)">Siguiente</button>
+    </div>
+    <div class="card hidden" id="message3">
+        <p>Por eso tú más que nadie merece pasar nuestro primer 14 de febrero juntos y estoy seguro que lo recordaremos siempre.</p>
+        <p>Entonces, ¿quieres ser mi San Valentín?</p>
+        <button onclick="yesResponse()">Sí</button>
+        <button id="noBtn" onmouseover="removeNo()">No</button>
+    </div>
+    <div class="card hidden" id="finalMessage">
+        <p>¡Sabía que ibas a decir que sí! 💖</p>
+    </div>
+    <script>
+        function openLetter() {
+            document.getElementById('envelope').classList.add('hidden');
+            document.getElementById('message').classList.remove('hidden');
+        }
+        function showMessage(step) {
+            document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
+            let nextMessage = document.getElementById(`message${step}`);
+            if (nextMessage) {
+                nextMessage.classList.remove('hidden');
+            }
+        }
+        function yesResponse() {
+            document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
+            document.getElementById('finalMessage').classList.remove('hidden');
+            showFloatingElements();
+        }
+        function removeNo() {
+            document.getElementById('noBtn').style.display = 'none';
+        }
+        function showFloatingElements() {
+            let elements = document.getElementById('celebration');
+            let symbols = ['❤️', '🌸', '💖', '💐', '🐻'];
+            for (let i = 0; i < 30; i++) {
+                let elem = document.createElement('div');
+                elem.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                elem.classList.add('floating');
+                elem.style.left = Math.random() * window.innerWidth + 'px';
+                elem.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                elem.style.fontSize = Math.random() * 25 + 25 + 'px';
+                elements.appendChild(elem);
+            }
+        }
+    </script>
+</body>
+</html>
