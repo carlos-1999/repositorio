@@ -17,6 +17,10 @@
             height: 100vh;
             flex-direction: column;
             overflow: hidden;
+            transition: background-color 1s ease;
+        }
+        .pink-background {
+            background-color: #ffe6f2 !important;
         }
         .card {
             background: white;
@@ -89,7 +93,7 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
     <div class="envelope-container">
         <img src="https://img.freepik.com/vector-premium/ilustracion-acuarela-carta-amor-corazon-sobre-fondo-transparente_552457-345.jpg" class="envelope" onclick="openLetter()" id="envelope">
     </div>
@@ -120,6 +124,7 @@
         function openLetter() {
             document.getElementById('envelope').classList.add('hidden');
             document.getElementById('message').classList.remove('hidden');
+            document.getElementById('body').classList.add('pink-background');
         }
         function showMessage(step) {
             document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
