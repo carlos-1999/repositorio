@@ -17,10 +17,15 @@
             height: 100vh;
             flex-direction: column;
             overflow: hidden;
-            transition: background-color 1s ease;
+            transition: background-color 1s ease, background-image 1s ease;
         }
         .pink-background {
             background-color: #ffe6f2 !important;
+        }
+        .gif-background {
+            background-image: url('https://i.imgur.com/9OeJ4sQ.gif');
+            background-size: cover;
+            background-position: center;
         }
         .card {
             background: white;
@@ -124,7 +129,7 @@
         function openLetter() {
             document.getElementById('envelope').classList.add('hidden');
             document.getElementById('message').classList.remove('hidden');
-            document.getElementById('body').classList.add('pink-background');
+            document.getElementById('body').classList.add('gif-background');
         }
         function showMessage(step) {
             document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
@@ -145,19 +150,6 @@
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
-        }
-        function showFloatingElements() {
-            let elements = document.getElementById('celebration');
-            let symbols = ['❤️', '🌸', '💖', '💐', '🐻'];
-            for (let i = 0; i < 30; i++) {
-                let elem = document.createElement('div');
-                elem.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                elem.classList.add('floating');
-                elem.style.left = Math.random() * window.innerWidth + 'px';
-                elem.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                elem.style.fontSize = Math.random() * 25 + 25 + 'px';
-                elements.appendChild(elem);
-            }
         }
     </script>
 </body>
